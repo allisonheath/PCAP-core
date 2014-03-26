@@ -167,20 +167,21 @@ if [[ ",$COMPILE," == *,biobambam,* ]] ; then
   else
     (
       set -e;
+      LIBMAUS_VERSION=0.0.108-release-20140319092837
       if hash curl 2>/dev/null; then
-        curl -sS -o libmaus-0.0.104-release-20140221093548.tar.gz -L https://github.com/gt1/libmaus/archive/0.0.104-release-20140221093548.tar.gz;
+        curl -sS -o libmaus-$LIBMAUS_VERSION.tar.gz -L https://github.com/gt1/libmaus/archive/$LIBMAUS_VERSION.tar.gz;
       else
-        wget -nv -O libmaus-0.0.104-release-20140221093548.tar.gz https://github.com/gt1/libmaus/archive/0.0.104-release-20140221093548.tar.gz;
+        wget -nv -O libmaus-$LIBMAUS_VERSION.tar.gz https://github.com/gt1/libmaus/archive/$LIBMAUS_VERSION.tar.gz;
       fi
-      tar zxf libmaus-0.0.104-release-20140221093548.tar.gz;
-      cd $SETUP_DIR/libmaus-0.0.104-release-20140221093548;
+      tar zxf libmaus-$LIBMAUS_VERSION.tar.gz;
+      cd $SETUP_DIR/libmaus-$LIBMAUS_VERSION;
       autoreconf -i -f;
       ./configure --prefix=$INST_PATH --with-snappy=$INST_PATH --with-io_lib=$INST_PATH
       make -j3;
       make -j3 install;
       cd $SETUP_DIR;
-      rm -rf $SETUP_DIR/libmaus-0.0.104-release-20140221093548;
-      rm -f libmaus-0.0.104-release-20140221093548.tar.gz;
+      rm -rf $SETUP_DIR/libmaus-$LIBMAUS_VERSION;
+      rm -f libmaus-$LIBMAUS_VERSION.tar.gz;
       touch $SETUP_DIR/libmaus.success;
       set +e;
     ) >>$INIT_DIR/setup.log 2>&1;
@@ -193,20 +194,21 @@ if [[ ",$COMPILE," == *,biobambam,* ]] ; then
   else
     (
       set -e;
+      BIOBAMBAM_VERSION=0.0.129-release-20140319092922
       if hash curl 2>/dev/null; then
-        curl -sS -o 0.0.125-release-20140221093621.tar.gz -L https://github.com/gt1/biobambam/archive/0.0.125-release-20140221093621.tar.gz;
+        curl -sS -o $BIOBAMBAM_VERSION.tar.gz -L https://github.com/gt1/biobambam/archive/$BIOBAMBAM_VERSION.tar.gz;
       else
-        wget -nv -O 0.0.125-release-20140221093621.tar.gz https://github.com/gt1/biobambam/archive/0.0.125-release-20140221093621.tar.gz;
+        wget -nv -O $BIOBAMBAM_VERSION.tar.gz https://github.com/gt1/biobambam/archive/$BIOBAMBAM_VERSION.tar.gz;
       fi
-      tar zxf 0.0.125-release-20140221093621.tar.gz;
-      cd $SETUP_DIR/biobambam-0.0.125-release-20140221093621;
+      tar zxf $BIOBAMBAM_VERSION.tar.gz;
+      cd $SETUP_DIR/biobambam-$BIOBAMBAM_VERSION;
       autoreconf -i -f;
       ./configure --with-libmaus=$INST_PATH --prefix=$INST_PATH
       make -j3;
       make -j3 install;
       cd $SETUP_DIR;
-      rm -rf $SETUP_DIR/biobambam-0.0.125-release-20140221093621;
-      rm -f 0.0.125-release-20140221093621.tar.gz;
+      rm -rf $SETUP_DIR/biobambam-$BIOBAMBAM_VERSION;
+      rm -f $BIOBAMBAM_VERSION.tar.gz;
       touch $SETUP_DIR/biobambam.success;
       set +e;
     ) >>$INIT_DIR/setup.log 2>&1;
